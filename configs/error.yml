@@ -1,0 +1,40 @@
+InternalServerError:
+  Code: "LWS-E001"
+  Message: "Internal Server Error"
+  HttpCode: 500
+InvalidRequest:
+  Code: "LWS-E002"
+  Message: "invalid request"
+  HttpCode: 400
+InvalidStateError:
+  Code: "LWS-E003"
+  Message: "State not match"
+  HttpCode: 401
+ProgrammaticError:
+  Code: "LWS-E004"
+  Message: "Internal coding error"
+  HttpCode: 401
+SessionTimeout:
+  Code: "LWS-E101"
+  Message: "this session is timeout"
+  HttpCode: 440
+PermissionDenied:
+  Code: "LWS-E102"
+  Message: "permission denied"
+  HttpCode: 401
+FeatureDisabled:
+  Code: "LWS-E901"
+  Message: "this feature was disabled"
+  HttpCode: 422
+LoginFailed:
+  Code : "LWS-E011"
+  Message: "Login Failed"
+  HttpCode: 401
+PasswordNotMatch:
+  Code: "LWS-E021"
+  Message: "Password not match"
+  HttpCode: 401
+PasswordValidateError:
+  Code: "LWS-E022"
+  Message: "Password validation failed."
+  HttpCode: 401
