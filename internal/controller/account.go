@@ -2,6 +2,8 @@ package controller
 
 import (
 	"api-hotel-booking/internal/database"
+	"api-hotel-booking/internal/grpc/client"
+	"api-hotel-booking/internal/grpc/proto"
 	"api-hotel-booking/internal/models"
 	"api-hotel-booking/internal/repository"
 	"api-hotel-booking/internal/responses"
@@ -14,7 +16,6 @@ import (
 )
 
 func GetAccount(c *gin.Context) {
-
 	q := c.Request.URL.Query()
 	limitS := q.Get("limit")
 	pageS := q.Get("page")
@@ -29,24 +30,8 @@ func GetAccount(c *gin.Context) {
 		log.Println(err)
 
 	}
-	pagination := models.Pagination{Limit: limit, Page: page}
-
-	//err = json.Unmarshal(body, &pagination)
-	db, err := database.Connect()
-	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
-		return
-	}
-	repo := repository.NewRepositoryAccountCRUD(db)
-	//pagination := []models.Account{}
-	func(accountRepository repository.AccountRepo) {
-		pagination, err = accountRepository.FindAll(pagination)
-		if err != nil {
-			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
-			return
-		}
-		c.JSON(http.StatusOK, pagination)
-	}(repo)
+	accounts := client.GetAllAccount(proto.AccountRequest{Page: int32(page), Offset: int32(limit)}, client.GrpcClient.AccountClient)
+	c.JSON(http.StatusOK, accounts)
 }
 
 func CreateAccount(c *gin.Context) {

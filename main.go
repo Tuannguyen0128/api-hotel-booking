@@ -1,7 +1,11 @@
 package main
 
-import "api-hotel-booking/internal"
+import (
+	"api-hotel-booking/internal/grpc/client"
+	"api-hotel-booking/internal/server"
+)
 
 func main() {
-	internal.Run()
+	client.InitGRPC()
+	server.Run()
 }

@@ -11,20 +11,20 @@ import (
 )
 
 func Login(c *gin.Context) {
-	teammember := models.Account{}
-	err := c.ShouldBindJSON(&teammember)
+	account := models.Account{}
+	err := c.ShouldBindJSON(&account)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	teammember.Prepare()
-	err = teammember.Validtate("login")
+	account.Prepare()
+	err = account.Validtate("login")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
 
-	tokenrp, err := auth.SignIn(teammember.Email, teammember.Password)
+	tokenrp, err := auth.SignIn(account.Email, account.Password)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
