@@ -19,8 +19,8 @@ type Route struct {
 //		}
 //	}
 func Load() []Route {
-	routes := append(userRouter, merchantroutes...)
-	routes = append(routes, loginRoutes...)
+	routes := append(userRouter, loginRoutes...)
+	//routes = append(routes, loginRoutes...)
 	return routes
 }
 func SetupRoutesWithMiddleWares(g *gin.Engine) {

@@ -15,23 +15,17 @@ func Load() {
 
 	}
 
-	err = db.Debug().AutoMigrate(&models.MerchantAccount{}, &models.TeamMember{})
+	err = db.Debug().AutoMigrate(&models.Account{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, merchant := range merchantaccount {
-		err = db.Debug().Model(&models.MerchantAccount{}).Create(&merchant).Error
-		if err != nil {
-			log.Fatal(err)
-		}
-		console.Pretty(merchant)
-	}
+
 	//err =db.Debug().Model(&models.TeamMember)
-	for _, teammember := range teammembers {
-		err = db.Debug().Model(&models.TeamMember{}).Create(&teammember).Error
+	for _, account := range accounts {
+		err = db.Debug().Model(&models.Account{}).Create(&account).Error
 		if err != nil {
 			log.Fatal(err)
 		}
-		console.Pretty(teammember)
+		console.Pretty(account)
 	}
 }

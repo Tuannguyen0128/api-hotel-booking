@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type TeamMember struct {
+type Account struct {
 	ID           uint32    `gorm:"primary_key;auto_increment" json:"id"`
 	Fullname     string    `gorm:"size:20;not null" json:"fullname"`
 	Email        string    `gorm:"size:50;not null;unique" json:"email"`
@@ -22,7 +22,7 @@ type TeamMember struct {
 	MerchantCode string    `json:"merchantcode"`
 }
 
-func (u *TeamMember) BeforeSave(tx *gorm.DB) error {
+func (u *Account) BeforeSave(tx *gorm.DB) error {
 	hashedPassword, err := security.Hash(u.Password)
 	if err != nil {
 		return err
@@ -31,14 +31,14 @@ func (u *TeamMember) BeforeSave(tx *gorm.DB) error {
 	//log.Fatal(string(hashedPassword))
 	return nil
 }
-func (t *TeamMember) Prepare() {
+func (t *Account) Prepare() {
 	t.ID = 0
 	t.Fullname = html.EscapeString(strings.TrimSpace(t.Fullname))
 	t.Email = html.EscapeString(strings.TrimSpace(t.Email))
 	t.CreatedAt = time.Now()
 	t.UpdatedAt = time.Now()
 }
-func (t *TeamMember) Validtate(action string) error {
+func (t *Account) Validtate(action string) error {
 	switch strings.ToLower(action) {
 	case "update":
 		if t.Fullname == "" {

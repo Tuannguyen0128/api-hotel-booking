@@ -11,12 +11,12 @@ func SignIn(email, password string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	teammember := models.TeamMember{}
-	err = db.Debug().Model(models.TeamMember{}).Where("email=?", email).Take(&teammember).Error
+	account := models.Account{}
+	err = db.Debug().Model(models.Account{}).Where("email=?", email).Take(&account).Error
 	if err != nil {
 		return "", err
 	}
-	err = security.VerifyPassword(teammember.Password, password)
+	err = security.VerifyPassword(account.Password, password)
 	if err != nil {
 		return "", err
 	}

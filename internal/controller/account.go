@@ -4,7 +4,6 @@ import (
 	"api-hotel-booking/internal/database"
 	"api-hotel-booking/internal/models"
 	"api-hotel-booking/internal/repository"
-	"api-hotel-booking/internal/repository/crud"
 	"api-hotel-booking/internal/responses"
 	"fmt"
 	"log"
@@ -14,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetTeamMembers(c *gin.Context) {
+func GetAccount(c *gin.Context) {
 
 	q := c.Request.URL.Query()
 	limitS := q.Get("limit")
@@ -38,10 +37,10 @@ func GetTeamMembers(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
-	//pagination := []models.TeamMember{}
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		pagination, err = teamMemberRepository.FindAll(pagination)
+	repo := repository.NewRepositoryAccountCRUD(db)
+	//pagination := []models.Account{}
+	func(accountRepository repository.AccountRepo) {
+		pagination, err = accountRepository.FindAll(pagination)
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
@@ -49,18 +48,16 @@ func GetTeamMembers(c *gin.Context) {
 		c.JSON(http.StatusOK, pagination)
 	}(repo)
 }
-func GetTeamMember(c *gin.Context) {
 
-}
-func CreateTeamMember(c *gin.Context) {
-	teammember := models.TeamMember{}
-	err := c.ShouldBindJSON(&teammember)
+func CreateAccount(c *gin.Context) {
+	account := models.Account{}
+	err := c.ShouldBindJSON(&account)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	teammember.Prepare()
-	err = teammember.Validtate("create")
+	account.Prepare()
+	err = account.Validtate("create")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
@@ -71,29 +68,29 @@ func CreateTeamMember(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		teammember, err = teamMemberRepository.Save(teammember)
+	repo := repository.NewRepositoryAccountCRUD(db)
+	func(accountRepository repository.AccountRepo) {
+		account, err = accountRepository.Save(account)
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
 		}
-		//w.Header().Set("Location", fmt.Sprintf("%s %s %d", r.Host, r.RequestURI, teammember.ID))
-		c.JSON(http.StatusCreated, teammember)
+		//w.Header().Set("Location", fmt.Sprintf("%s %s %d", r.Host, r.RequestURI, account.ID))
+		c.JSON(http.StatusCreated, account)
 	}(repo)
 }
-func UpdateTeamMember(c *gin.Context) {
+func UpdateAccount(c *gin.Context) {
 	id := c.Param("id")
 	uid, err := strconv.ParseUint(id, 10, 32)
 	if err != nil {
 		responses.ERROR(http.StatusBadRequest, err.Error())
 	}
 
-	teammember := models.TeamMember{}
-	err = c.ShouldBindJSON(&teammember)
-	fmt.Println(teammember)
-	teammember.Prepare()
-	err = teammember.Validtate("update")
+	account := models.Account{}
+	err = c.ShouldBindJSON(&account)
+	fmt.Println(account)
+	account.Prepare()
+	err = account.Validtate("update")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 	}
@@ -106,10 +103,10 @@ func UpdateTeamMember(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
+	repo := repository.NewRepositoryAccountCRUD(db)
 
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		rows, err := teamMemberRepository.Update(uint32(uid), teammember)
+	func(accountRepository repository.AccountRepo) {
+		rows, err := accountRepository.Update(uint32(uid), account)
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
@@ -117,7 +114,7 @@ func UpdateTeamMember(c *gin.Context) {
 		c.JSON(http.StatusOK, fmt.Sprintf("%d row affected", rows))
 	}(repo)
 }
-func DeleteTeamMember(c *gin.Context) {
+func DeleteAccount(c *gin.Context) {
 	id := c.Param("id")
 	uid, err := strconv.ParseUint(id, 10, 32)
 	if err != nil {
@@ -128,10 +125,10 @@ func DeleteTeamMember(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
+	repo := repository.NewRepositoryAccountCRUD(db)
 
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		rows, err := teamMemberRepository.Delete(uint32(uid))
+	func(accountRepository repository.AccountRepo) {
+		rows, err := accountRepository.Delete(uint32(uid))
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
@@ -148,15 +145,15 @@ func FindByEmail(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
-	//pagination := []models.TeamMember{}
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		teammember, err := teamMemberRepository.FindByEmail(email)
+	repo := repository.NewRepositoryAccountCRUD(db)
+	//pagination := []models.Account{}
+	func(accountRepository repository.AccountRepo) {
+		account, err := accountRepository.FindByEmail(email)
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
 		}
-		c.JSON(http.StatusOK, teammember)
+		c.JSON(http.StatusOK, account)
 	}(repo)
 }
 func FindByMerchantCode(c *gin.Context) {
@@ -167,14 +164,14 @@ func FindByMerchantCode(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
-	repo := crud.NewRepositoryTeamMemberCRUD(db)
-	//pagination := []models.TeamMember{}
-	func(teamMemberRepository repository.TeamMemberRepository) {
-		teammembers, err := teamMemberRepository.FindByMerchantCode(merchantcode)
+	repo := repository.NewRepositoryAccountCRUD(db)
+	//pagination := []models.Account{}
+	func(accountRepository repository.AccountRepo) {
+		accounts, err := accountRepository.FindByMerchantCode(merchantcode)
 		if err != nil {
 			c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 			return
 		}
-		c.JSON(http.StatusOK, teammembers)
+		c.JSON(http.StatusOK, accounts)
 	}(repo)
 }

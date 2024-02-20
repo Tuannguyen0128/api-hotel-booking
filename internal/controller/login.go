@@ -11,7 +11,7 @@ import (
 )
 
 func Login(c *gin.Context) {
-	teammember := models.TeamMember{}
+	teammember := models.Account{}
 	err := c.ShouldBindJSON(&teammember)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
