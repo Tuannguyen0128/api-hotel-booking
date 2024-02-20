@@ -1,10 +1,10 @@
 package app
 
 import (
-	"time"
-
 	"api-hotel-booking/internal/app/server"
+	database "api-hotel-booking/internal/app/thirdparty/database"
 	"api-hotel-booking/internal/app/thirdparty/mongo"
+	"time"
 )
 
 type (
@@ -16,6 +16,7 @@ type (
 		Server        server.Config `mapstructure:"Server"`
 		Service       Service       `mapstructure:"Service"`
 		Mongo         mongo.Config  `mapstructure:"Mongo"`
+		MySQL         database.MysqlConf  `mapstructure:"Mysql"`
 		Email         Email         `mapstructure:"Email"`
 		HTTPTransport HTTPTransport `mapstructure:"HttpTransport"`
 		IsDebug       bool          `mapstructure:"DebugMode"`

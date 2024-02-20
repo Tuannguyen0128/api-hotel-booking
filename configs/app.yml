@@ -21,7 +21,7 @@ Server:
       - Content-Type
       - Authorization
     AllowCredentials: true
-    AllowMethods: [ GET, POST, PUT, DELETE, HEAD, OPTIONS ]
+    AllowMethods: [GET, POST, PUT, DELETE, HEAD, OPTIONS]
 DebugMode: true
 Service:
   Jwt:
@@ -182,6 +182,15 @@ Mongo:
   TLS:
     Enabled: false
     CertPath: ""
+Mysql:
+  username: "root"
+  password: "test"
+  host: "localhost"
+  port: "3306"
+  tls: false
+  name: "hotel_service"
+  type: "mysql"
+
 Email:
   Address: "email-smtp.us-east-1.amazonaws.com:587"
   Auth:

@@ -11,11 +11,17 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/jordan-wright/email v0.0.0-20200602115436-fd8a7622303e
 	github.com/pkg/errors v0.9.1
+	github.com/sirupsen/logrus v1.2.0
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.8.4
 	go.mongodb.org/mongo-driver v1.14.0
 	go.uber.org/zap v1.16.0
 	golang.org/x/crypto v0.17.0
+)
+
+require (
+	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
+	golang.org/x/term v0.15.0 // indirect
 )
 
 require (
@@ -29,6 +35,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.15.5 // indirect
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
