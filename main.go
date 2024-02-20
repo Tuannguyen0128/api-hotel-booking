@@ -1,7 +1,7 @@
 package main
 
-import "ProjectPractice/src/api"
+import "api-hotel-booking/internal"
 
 func main() {
-	api.Run()
+	internal.Run()
 }
