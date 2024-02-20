@@ -1,9 +1,0 @@
-db.getCollection('partner_license_info').createIndex(
-{
-    "id": 1
-},
-{
-    name: "partner_id",
-    unique: true,
-}
-)

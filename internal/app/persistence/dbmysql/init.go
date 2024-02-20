@@ -1,4 +1,4 @@
-package dbmongo
+package dbmysql
 
 import (
 	"api-hotel-booking/internal/app/persistence"

@@ -1,4 +1,0 @@
-level: debug
-output: stdout
-errOutput: stderr
-format: json
