@@ -1,4 +1,4 @@
-module ProjectPractice
+module api-hotel-booking
 
 go 1.19
 
