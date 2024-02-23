@@ -2,7 +2,6 @@ package routes
 
 import (
 	"api-hotel-booking/internal/middlewares"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +13,9 @@ type Route struct {
 }
 
 func Load() []Route {
-	routes := append(accountRouter)
+	routes := make([]Route, 0)
+	accountRouter = append(accountRouter, staffRouter...)
+	accountRouter = append(accountRouter, bookingRouter...)
 	return routes
 }
 func SetupRoutesWithMiddleWares(g *gin.Engine) {

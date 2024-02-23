@@ -5,7 +5,6 @@ import (
 	"api-hotel-booking/internal/grpc/proto"
 	"api-hotel-booking/internal/models"
 	"api-hotel-booking/internal/responses"
-	"github.com/google/uuid"
 	"log"
 	"net/http"
 	"strconv"
@@ -44,13 +43,8 @@ func CreateAccount(c *gin.Context) {
 		return
 	}
 
-	id, err := uuid.NewUUID()
-	if err != nil {
-		log.Println(err)
-	}
-
 	accountRequest := &proto.Account{
-		Id:          id.String(),
+		Id:          "",
 		StaffId:     account.StaffID,
 		Username:    account.Username,
 		Password:    account.Password,
@@ -68,14 +62,13 @@ func CreateAccount(c *gin.Context) {
 func UpdateAccount(c *gin.Context) {
 	account := models.Account{}
 	err := c.ShouldBindJSON(&account)
-	account.ID = c.Param("id")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
 
 	accountRequest := &proto.Account{
-		Id:          account.ID,
+		Id:          c.Param("id"),
 		StaffId:     account.StaffID,
 		Username:    account.Username,
 		Password:    account.Password,

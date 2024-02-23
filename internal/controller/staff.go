@@ -66,14 +66,13 @@ func CreateStaff(c *gin.Context) {
 func UpdateStaff(c *gin.Context) {
 	staff := models.Staff{}
 	err := c.ShouldBindJSON(&staff)
-	staff.ID = c.Param("id")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
 
 	staffRequest := &proto.Staff{
-		Id:          "",
+		Id:          c.Param("id"),
 		FirstName:   staff.FirstName,
 		LastName:    staff.LastName,
 		Position:    staff.Position,
