@@ -3,20 +3,28 @@ package protobufs;
 option go_package="./proto";
 service StaffService {
   rpc GetStaffs (GetStaffsRequest) returns (GetStaffsResponse);
+  rpc CreateStaff (Staff) returns (Staff);
+  rpc UpdateStaff (Staff) returns (Staff);
+  rpc DeleteStaff (DeleteStaffRequest) returns (DeleteStaffResponse);
 }
 
 message GetStaffsRequest {
-  string id =1;
-  string position=3;
-  int32 page =4;
-  int32 offset=5;
+  string id = 1;
+  string position = 2;
+  int32 page = 3;
+  int32 offset = 4;
 }
-message GetStaffByIdRequest {
-  int32 citizen_id =1;
+
+message DeleteStaffRequest {
+  string id = 1;
+}
+
+message DeleteStaffResponse {
+  string result = 1;
 }
 
 message GetStaffsResponse {
-  repeated Staff staffs=1;
+  repeated Staff staffs = 1;
 }
 
 message Staff {
@@ -24,7 +32,7 @@ message Staff {
   string first_name = 2;
   string last_name = 3;
   string position = 4;
-  string salary = 5;
+  double salary = 5;
   string date_of_birth = 6;
   string phone = 7;
   string email = 8;

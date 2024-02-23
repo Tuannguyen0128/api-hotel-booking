@@ -20,4 +20,5 @@ func InitGRPC() {
 
 type Client struct {
 	AccountClient proto.AccountServiceClient
+	StaffClient   proto.StaffServiceClient
 }

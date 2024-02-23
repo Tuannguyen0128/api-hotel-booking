@@ -13,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAccount(c *gin.Context) {
+func GetAccounts(c *gin.Context) {
 	q := c.Request.URL.Query()
 	limitS := q.Get("limit")
 	pageS := q.Get("page")

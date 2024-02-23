@@ -39,16 +39,3 @@ message Account {
   string deleted_at = 8;
   string last_login_at = 9;
 }
-
-message Staff {
-  string id = 1 ;
-  string first_name = 2;
-  string last_name = 3;
-  string position = 4;
-  string salary = 5;
-  string date_of_birth = 6;
-  string phone = 7;
-  string email = 8;
-  string start_date = 9;
-  string deleted_at = 10;
-}

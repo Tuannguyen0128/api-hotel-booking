@@ -33,7 +33,7 @@ func UpdateAccount(req *proto.Account, c proto.AccountServiceClient) *proto.Acco
 func DeleteAccount(req *proto.DeleteAccountRequest, c proto.AccountServiceClient) *proto.DeleteAccountResponse {
 	res, err := c.DeleteAccount(context.Background(), req)
 	if err != nil {
-		log.Fatalln("err when updating account", err)
+		log.Fatalln("err when deleting account", err)
 	}
 	return res
 }
