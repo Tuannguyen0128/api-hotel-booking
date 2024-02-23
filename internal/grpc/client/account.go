@@ -6,11 +6,34 @@ import (
 	"log"
 )
 
-func GetAllAccount(req proto.AccountRequest, c proto.AccountServiceClient) []*proto.Account {
-	res, err := c.GetAllAccount(context.Background(), &req)
+func GetAllAccount(req *proto.GetAccountsRequest, c proto.AccountServiceClient) []*proto.Account {
+	res, err := c.GetAllAccount(context.Background(), req)
 	if err != nil {
-		log.Fatalln("err when call sum", err)
+		log.Fatalln("err when getting all accounts", err)
 	}
-	//log.Println("calSum response", res.Accounts())
 	return res.GetAccounts()
+}
+
+func CreateAccount(req *proto.Account, c proto.AccountServiceClient) *proto.Account {
+	res, err := c.CreateAccount(context.Background(), req)
+	if err != nil {
+		log.Fatalln("err when creating account", err)
+	}
+	return res
+}
+
+func UpdateAccount(req *proto.Account, c proto.AccountServiceClient) *proto.Account {
+	res, err := c.UpdateAccount(context.Background(), req)
+	if err != nil {
+		log.Fatalln("err when updating account", err)
+	}
+	return res
+}
+
+func DeleteAccount(req *proto.DeleteAccountRequest, c proto.AccountServiceClient) *proto.DeleteAccountResponse {
+	res, err := c.DeleteAccount(context.Background(), req)
+	if err != nil {
+		log.Fatalln("err when updating account", err)
+	}
+	return res
 }

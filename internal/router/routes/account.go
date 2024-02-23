@@ -13,19 +13,13 @@ var userRouter = []Route{
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/{id}",
-		Method:       http.MethodGet,
-		Handler:      controller.GetAccount,
-		AuthRequired: true,
-	},
-	{
 		Uri:          "/account",
 		Method:       http.MethodPost,
 		Handler:      controller.CreateAccount,
-		AuthRequired: false,
+		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/{id}",
+		Uri:          "/account/:id",
 		Method:       http.MethodPut,
 		Handler:      controller.UpdateAccount,
 		AuthRequired: true,
@@ -34,18 +28,6 @@ var userRouter = []Route{
 		Uri:          "/account/{id}",
 		Method:       http.MethodDelete,
 		Handler:      controller.DeleteAccount,
-		AuthRequired: true,
-	},
-	{
-		Uri:          "/get-account-by-email",
-		Method:       http.MethodGet,
-		Handler:      controller.FindByEmail,
-		AuthRequired: true,
-	},
-	{
-		Uri:          "/get-account-by-merchantcode",
-		Method:       http.MethodGet,
-		Handler:      controller.FindByMerchantCode,
 		AuthRequired: true,
 	},
 }

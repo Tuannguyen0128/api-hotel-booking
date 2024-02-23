@@ -2,24 +2,53 @@ syntax = "proto3";
 package protobufs;
 option go_package="./proto";
 service AccountService {
-  rpc GetAllAccount (AccountRequest) returns (AccountResponse);
+  rpc GetAllAccount (GetAccountsRequest) returns (AccountResponse);
+  rpc CreateAccount (Account) returns (Account);
+  rpc UpdateAccount (Account) returns (Account);
+  rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse);
 }
 
-message AccountRequest {
-  int32 page =1;
-  int32 offset=2;
+message DeleteAccountRequest {
+  string id = 1;
+}
+
+message DeleteAccountResponse {
+  string result = 1;
+}
+
+message GetAccountsRequest {
+  string id = 1;
+  string staff_id = 2;
+  string username = 3;
+  int32 page = 4;
+  int32 offset = 5;
 }
 
 message AccountResponse {
-  repeated Account accounts=1;
+  repeated Account accounts = 1;
 }
 
 message Account {
-  uint32   ID =1;
-  string Fullname=2;
-  string Email=3;
-  string Password=4;
-  string CreatedAt=5;
-  string UpdatedAt=6;
-  string MerchantCode=7;
+  string id = 1 ;
+  string staff_id = 2;
+  string username = 3;
+  string password = 4;
+  string user_role_id = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  string deleted_at = 8;
+  string last_login_at = 9;
+}
+
+message Staff {
+  string id = 1 ;
+  string first_name = 2;
+  string last_name = 3;
+  string position = 4;
+  string salary = 5;
+  string date_of_birth = 6;
+  string phone = 7;
+  string email = 8;
+  string start_date = 9;
+  string deleted_at = 10;
 }

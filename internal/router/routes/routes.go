@@ -13,14 +13,8 @@ type Route struct {
 	AuthRequired bool
 }
 
-//	func SetupRoutes(c *gin.Engine) {
-//		for _, router := range Load() {
-//			c.Handle(router.Method,router.Uri, router.Handler)
-//		}
-//	}
 func Load() []Route {
-	routes := append(userRouter, loginRoutes...)
-	//routes = append(routes, loginRoutes...)
+	routes := append(userRouter)
 	return routes
 }
 func SetupRoutesWithMiddleWares(g *gin.Engine) {
