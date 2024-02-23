@@ -52,11 +52,9 @@ func CreateStaff(c *gin.Context) {
 		LastName:    staff.LastName,
 		Position:    staff.Position,
 		Salary:      staff.Salary,
-		DateOfBirth: staff.DateOfBirth,
-		Phone:       staff.DateOfBirth,
+		DateOfBirth: staff.DateOfBirth.String(),
+		Phone:       staff.Phone,
 		Email:       staff.Email,
-		StartDate:   staff.StartDate.String(),
-		DeletedAt:   staff.DeletedAt.String(),
 	}
 
 	createdStaff := client.CreateStaff(staffRequest, client.GrpcClient.StaffClient)
@@ -77,11 +75,9 @@ func UpdateStaff(c *gin.Context) {
 		LastName:    staff.LastName,
 		Position:    staff.Position,
 		Salary:      staff.Salary,
-		DateOfBirth: staff.DateOfBirth,
-		Phone:       staff.DateOfBirth,
+		DateOfBirth: staff.DateOfBirth.String(),
+		Phone:       staff.Phone,
 		Email:       staff.Email,
-		StartDate:   staff.StartDate.String(),
-		DeletedAt:   staff.DeletedAt.String(),
 	}
 
 	updatedStaff := client.UpdateStaff(staffRequest, client.GrpcClient.StaffClient)

@@ -54,9 +54,6 @@ func CreateBooking(c *gin.Context) {
 		CheckinTime:   booking.CheckinTime.String(),
 		CheckoutTime:  booking.CheckoutTime.String(),
 		TotalPrice:    fmt.Sprintf("%f", booking.TotalPrice),
-		CreateAt:      booking.CreatedAt.String(),
-		UpdateAt:      booking.UpdatedAt.String(),
-		DeleteAt:      booking.DeletedAt.String(),
 		Status:        booking.Status,
 		PaymentStatus: booking.PaymentStatus,
 	}
@@ -80,9 +77,6 @@ func UpdateBooking(c *gin.Context) {
 		CheckinTime:   booking.CheckinTime.String(),
 		CheckoutTime:  booking.CheckoutTime.String(),
 		TotalPrice:    fmt.Sprintf("%f", booking.TotalPrice),
-		CreateAt:      booking.CreatedAt.String(),
-		UpdateAt:      booking.UpdatedAt.String(),
-		DeleteAt:      booking.DeletedAt.String(),
 		Status:        booking.Status,
 		PaymentStatus: booking.PaymentStatus,
 	}

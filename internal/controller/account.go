@@ -44,15 +44,11 @@ func CreateAccount(c *gin.Context) {
 	}
 
 	accountRequest := &proto.Account{
-		Id:          "",
-		StaffId:     account.StaffID,
-		Username:    account.Username,
-		Password:    account.Password,
-		UserRoleId:  account.UserRoleID,
-		CreatedAt:   account.CreatedAt.String(),
-		UpdatedAt:   account.UpdatedAt.String(),
-		DeletedAt:   account.DeletedAt.String(),
-		LastLoginAt: account.LastLoginAt.String(),
+		Id:         "",
+		StaffId:    account.StaffID,
+		Username:   account.Username,
+		Password:   account.Password,
+		UserRoleId: account.UserRoleID,
 	}
 
 	createdAccount := client.CreateAccount(accountRequest, client.GrpcClient.AccountClient)
@@ -68,15 +64,11 @@ func UpdateAccount(c *gin.Context) {
 	}
 
 	accountRequest := &proto.Account{
-		Id:          c.Param("id"),
-		StaffId:     account.StaffID,
-		Username:    account.Username,
-		Password:    account.Password,
-		UserRoleId:  account.UserRoleID,
-		CreatedAt:   account.CreatedAt.String(),
-		UpdatedAt:   account.UpdatedAt.String(),
-		DeletedAt:   account.DeletedAt.String(),
-		LastLoginAt: account.LastLoginAt.String(),
+		Id:         c.Param("id"),
+		StaffId:    account.StaffID,
+		Username:   account.Username,
+		Password:   account.Password,
+		UserRoleId: account.UserRoleID,
 	}
 
 	updatedAccount := client.UpdateAccount(accountRequest, client.GrpcClient.AccountClient)
