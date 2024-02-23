@@ -28,7 +28,11 @@ func GetAccount(c *gin.Context) {
 	if err != nil {
 		log.Println(err)
 	}
-	accounts := client.GetAllAccount(&proto.GetAccountsRequest{Page: int32(page), Offset: int32(limit), Id: id, Username: username, StaffId: staffID}, client.GrpcClient.AccountClient)
+	accounts := client.GetAccounts(&proto.GetAccountsRequest{Page: int32(page), Offset: int32(limit), Id: id, Username: username, StaffId: staffID}, client.GrpcClient.AccountClient)
+	if accounts == nil {
+		c.JSON(http.StatusOK, &proto.Account{})
+		return
+	}
 	c.JSON(http.StatusOK, accounts)
 }
 

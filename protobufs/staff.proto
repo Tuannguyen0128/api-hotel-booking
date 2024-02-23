@@ -1,0 +1,33 @@
+syntax = "proto3";
+package protobufs;
+option go_package="./proto";
+service StaffService {
+  rpc GetStaffs (GetStaffsRequest) returns (GetStaffsResponse);
+}
+
+message GetStaffsRequest {
+  string id =1;
+  string position=3;
+  int32 page =4;
+  int32 offset=5;
+}
+message GetStaffByIdRequest {
+  int32 citizen_id =1;
+}
+
+message GetStaffsResponse {
+  repeated Staff staffs=1;
+}
+
+message Staff {
+  string id = 1 ;
+  string first_name = 2;
+  string last_name = 3;
+  string position = 4;
+  string salary = 5;
+  string date_of_birth = 6;
+  string phone = 7;
+  string email = 8;
+  string start_date = 9;
+  string deleted_at = 10;
+}

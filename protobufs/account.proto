@@ -2,7 +2,7 @@ syntax = "proto3";
 package protobufs;
 option go_package="./proto";
 service AccountService {
-  rpc GetAllAccount (GetAccountsRequest) returns (AccountResponse);
+  rpc GetAccounts (GetAccountsRequest) returns (AccountResponse);
   rpc CreateAccount (Account) returns (Account);
   rpc UpdateAccount (Account) returns (Account);
   rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse);

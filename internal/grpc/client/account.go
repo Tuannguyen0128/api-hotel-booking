@@ -6,8 +6,8 @@ import (
 	"log"
 )
 
-func GetAllAccount(req *proto.GetAccountsRequest, c proto.AccountServiceClient) []*proto.Account {
-	res, err := c.GetAllAccount(context.Background(), req)
+func GetAccounts(req *proto.GetAccountsRequest, c proto.AccountServiceClient) []*proto.Account {
+	res, err := c.GetAccounts(context.Background(), req)
 	if err != nil {
 		log.Fatalln("err when getting all accounts", err)
 	}
