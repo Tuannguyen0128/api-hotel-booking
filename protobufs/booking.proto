@@ -1,0 +1,41 @@
+syntax = "proto3";
+package protobufs;
+option go_package="./proto";
+service BookingService {
+  rpc GetBookings (GetBookingsRequest) returns (GetBookingsResponse);
+  rpc CreateBooking (Booking) returns (Booking);
+  rpc DeleteBooking (DeleteBookingRequest) returns (DeleteBookingResponse);
+  rpc UpdateBooking (Booking) returns (Booking);
+}
+
+message GetBookingsRequest {
+  string id = 1;
+  string staff_id = 2;
+  string position = 3;
+  int32 page = 4;
+  int32 offset = 5;
+}
+
+message DeleteBookingRequest{
+  string id = 1;
+}
+message DeleteBookingResponse{
+  string result = 1;
+}
+
+message GetBookingsResponse {
+  repeated Booking bookings = 1;
+}
+message Booking {
+  string id = 1 ;
+  string guest_id = 2;
+  string account_id = 3;
+  string checkin_time = 4;
+  string checkout_time = 5;
+  string total_price = 6;
+  string create_at = 7;
+  string update_at = 8;
+  string delete_at = 9;
+  string status = 10;
+  string payment_status = 11;
+}

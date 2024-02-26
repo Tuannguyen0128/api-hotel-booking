@@ -5,29 +5,29 @@ import (
 	"net/http"
 )
 
-var accountRouter = []Route{
+var bookingRouter = []Route{
 	{
-		Uri:          "/accounts",
+		Uri:          "/bookings",
 		Method:       http.MethodGet,
-		Handler:      controller.GetAccounts,
+		Handler:      controller.GetBookings,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account",
+		Uri:          "/booking",
 		Method:       http.MethodPost,
-		Handler:      controller.CreateAccount,
+		Handler:      controller.CreateBooking,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/:id",
+		Uri:          "/booking/:id",
 		Method:       http.MethodPut,
-		Handler:      controller.UpdateAccount,
+		Handler:      controller.UpdateBooking,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/:id",
+		Uri:          "/booking/:id",
 		Method:       http.MethodDelete,
-		Handler:      controller.DeleteAccount,
+		Handler:      controller.DeleteBooking,
 		AuthRequired: true,
 	},
 }

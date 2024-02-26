@@ -5,29 +5,29 @@ import (
 	"net/http"
 )
 
-var accountRouter = []Route{
+var staffRouter = []Route{
 	{
-		Uri:          "/accounts",
+		Uri:          "/staffs",
 		Method:       http.MethodGet,
-		Handler:      controller.GetAccounts,
+		Handler:      controller.GetStaffs,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account",
+		Uri:          "/staff",
 		Method:       http.MethodPost,
-		Handler:      controller.CreateAccount,
+		Handler:      controller.CreateStaff,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/:id",
+		Uri:          "/staff/:id",
 		Method:       http.MethodPut,
-		Handler:      controller.UpdateAccount,
+		Handler:      controller.UpdateStaff,
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/:id",
+		Uri:          "/staff/:id",
 		Method:       http.MethodDelete,
-		Handler:      controller.DeleteAccount,
+		Handler:      controller.DeleteStaff,
 		AuthRequired: true,
 	},
 }

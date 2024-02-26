@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAccount(c *gin.Context) {
+func GetAccounts(c *gin.Context) {
 	q := c.Request.URL.Query()
 	limitS := q.Get("limit")
 	pageS := q.Get("page")
@@ -43,11 +43,8 @@ func CreateAccount(c *gin.Context) {
 		return
 	}
 
-	if err != nil {
-		log.Println(err)
-	}
-
 	accountRequest := &proto.Account{
+		Id:         "",
 		StaffId:    account.StaffID,
 		Username:   account.Username,
 		Password:   account.Password,
@@ -61,22 +58,17 @@ func CreateAccount(c *gin.Context) {
 func UpdateAccount(c *gin.Context) {
 	account := models.Account{}
 	err := c.ShouldBindJSON(&account)
-	account.ID = c.Param("id")
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, responses.ERROR(http.StatusUnprocessableEntity, err.Error()))
 		return
 	}
 
 	accountRequest := &proto.Account{
-		Id:          account.ID,
-		StaffId:     account.StaffID,
-		Username:    account.Username,
-		Password:    account.Password,
-		UserRoleId:  account.UserRoleID,
-		CreatedAt:   account.CreatedAt.String(),
-		UpdatedAt:   account.UpdatedAt.String(),
-		DeletedAt:   account.DeletedAt.String(),
-		LastLoginAt: account.LastLoginAt.String(),
+		Id:         c.Param("id"),
+		StaffId:    account.StaffID,
+		Username:   account.Username,
+		Password:   account.Password,
+		UserRoleId: account.UserRoleID,
 	}
 
 	updatedAccount := client.UpdateAccount(accountRequest, client.GrpcClient.AccountClient)

@@ -16,9 +16,18 @@ func InitGRPC() {
 		log.Fatalln("err when dial", err)
 	}
 	accountClient := proto.NewAccountServiceClient(cc)
-	GrpcClient = &Client{AccountClient: accountClient}
+	staffClient := proto.NewStaffServiceClient(cc)
+	bookingClient := proto.NewBookingServiceClient(cc)
+
+	GrpcClient = &Client{
+		AccountClient: accountClient,
+		StaffClient:   staffClient,
+		BookingClient: bookingClient,
+	}
 }
 
 type Client struct {
 	AccountClient proto.AccountServiceClient
+	StaffClient   proto.StaffServiceClient
+	BookingClient proto.BookingServiceClient
 }
