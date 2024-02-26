@@ -5,7 +5,6 @@ import (
 	"api-hotel-booking/internal/grpc/proto"
 	"api-hotel-booking/internal/models"
 	"api-hotel-booking/internal/responses"
-	"github.com/google/uuid"
 	"log"
 	"net/http"
 	"strconv"
@@ -44,21 +43,15 @@ func CreateAccount(c *gin.Context) {
 		return
 	}
 
-	id, err := uuid.NewUUID()
 	if err != nil {
 		log.Println(err)
 	}
 
 	accountRequest := &proto.Account{
-		Id:          id.String(),
-		StaffId:     account.StaffID,
-		Username:    account.Username,
-		Password:    account.Password,
-		UserRoleId:  account.UserRoleID,
-		CreatedAt:   account.CreatedAt.String(),
-		UpdatedAt:   account.UpdatedAt.String(),
-		DeletedAt:   account.DeletedAt.String(),
-		LastLoginAt: account.LastLoginAt.String(),
+		StaffId:    account.StaffID,
+		Username:   account.Username,
+		Password:   account.Password,
+		UserRoleId: account.UserRoleID,
 	}
 
 	createdAccount := client.CreateAccount(accountRequest, client.GrpcClient.AccountClient)

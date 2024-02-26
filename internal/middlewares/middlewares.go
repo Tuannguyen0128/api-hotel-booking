@@ -1,12 +1,8 @@
 package middlewares
 
 import (
-	"api-hotel-booking/internal/auth"
-	"api-hotel-booking/internal/responses"
-	"log"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 func SetMiddleWareLogger() gin.HandlerFunc {
@@ -18,21 +14,6 @@ func SetMiddleWareLogger() gin.HandlerFunc {
 func SetMiddleWareJSON() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Header("Content-Type", "application/json")
-		c.Next()
-	}
-}
-
-func SetMiddleWareAuthentication() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		token := auth.ExtractToken(c)
-		log.Println("Token:" + token)
-		err := auth.TokenValidate(token)
-		if err != nil {
-			log.Println(err)
-			responses.ERROR(http.StatusUnauthorized, err.Error())
-			return
-		}
-
 		c.Next()
 	}
 }

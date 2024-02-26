@@ -23,7 +23,6 @@ func SetupRoutesWithMiddleWares(g *gin.Engine) {
 			g.Handle(router.Method, "/api"+router.Uri,
 				middlewares.SetMiddleWareLogger(),
 				middlewares.SetMiddleWareJSON(),
-				middlewares.SetMiddleWareAuthentication(),
 				router.Handler,
 			)
 		} else {

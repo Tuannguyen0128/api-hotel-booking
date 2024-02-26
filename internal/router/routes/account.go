@@ -25,7 +25,7 @@ var userRouter = []Route{
 		AuthRequired: true,
 	},
 	{
-		Uri:          "/account/{id}",
+		Uri:          "/account/:id",
 		Method:       http.MethodDelete,
 		Handler:      controller.DeleteAccount,
 		AuthRequired: true,
