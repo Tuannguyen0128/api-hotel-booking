@@ -14,7 +14,7 @@ import (
 
 func GetAccounts(c *gin.Context) {
 	q := c.Request.URL.Query()
-	limitS := q.Get("limit")
+	limitS := q.Get("offset")
 	pageS := q.Get("page")
 	id := q.Get("id")
 	username := q.Get("username")
