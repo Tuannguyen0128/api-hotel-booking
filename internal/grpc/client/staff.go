@@ -14,7 +14,7 @@ func GetStaffs(req *proto.GetStaffsRequest, c proto.StaffServiceClient) []*proto
 	return res.GetStaffs()
 }
 
-func CreateStaff(req *proto.Staff, c proto.StaffServiceClient) *proto.Staff {
+func CreateStaff(req *proto.Staff, c proto.StaffServiceClient) *proto.CreateStaffResponse {
 	res, err := c.CreateStaff(context.Background(), req)
 	if err != nil {
 		log.Fatalln("err when creating staff", err)

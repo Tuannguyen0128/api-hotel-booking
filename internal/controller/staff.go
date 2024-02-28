@@ -14,8 +14,9 @@ import (
 
 func GetStaffs(c *gin.Context) {
 	q := c.Request.URL.Query()
-	limitS := q.Get("limit")
-	limit, err := strconv.Atoi(limitS)
+
+	offsetS := q.Get("offset")
+	offset, err := strconv.Atoi(offsetS)
 	if err != nil {
 		log.Println(err)
 	}
@@ -30,7 +31,7 @@ func GetStaffs(c *gin.Context) {
 
 	position := q.Get("position")
 
-	staffs := client.GetStaffs(&proto.GetStaffsRequest{Page: int32(page), Offset: int32(limit), Id: id, Position: position}, client.GrpcClient.StaffClient)
+	staffs := client.GetStaffs(&proto.GetStaffsRequest{Page: int32(page), Offset: int32(offset), Id: id, Position: position}, client.GrpcClient.StaffClient)
 	if staffs == nil {
 		c.JSON(http.StatusOK, &proto.Staff{})
 		return

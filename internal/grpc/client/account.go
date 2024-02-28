@@ -14,7 +14,7 @@ func GetAccounts(req *proto.GetAccountsRequest, c proto.AccountServiceClient) []
 	return res.GetAccounts()
 }
 
-func CreateAccount(req *proto.Account, c proto.AccountServiceClient) *proto.Account {
+func CreateAccount(req *proto.Account, c proto.AccountServiceClient) *proto.CreateAccountResponse {
 	res, err := c.CreateAccount(context.Background(), req)
 	if err != nil {
 		log.Fatalln("err when creating account", err)

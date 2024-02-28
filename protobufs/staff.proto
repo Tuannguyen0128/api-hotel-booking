@@ -3,7 +3,7 @@ package protobufs;
 option go_package="./proto";
 service StaffService {
   rpc GetStaffs (GetStaffsRequest) returns (GetStaffsResponse);
-  rpc CreateStaff (Staff) returns (Staff);
+  rpc CreateStaff (Staff) returns (CreateStaffResponse);
   rpc UpdateStaff (Staff) returns (Staff);
   rpc DeleteStaff (DeleteStaffRequest) returns (DeleteStaffResponse);
 }
@@ -13,6 +13,10 @@ message GetStaffsRequest {
   string position = 2;
   int32 page = 3;
   int32 offset = 4;
+}
+
+message CreateStaffResponse {
+  string id =1;
 }
 
 message DeleteStaffRequest {

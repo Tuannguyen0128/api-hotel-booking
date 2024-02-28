@@ -2,30 +2,34 @@ syntax = "proto3";
 package protobufs;
 option go_package="./proto";
 service AccountService {
-  rpc GetAccounts (GetAccountsRequest) returns (AccountResponse);
-  rpc CreateAccount (Account) returns (Account);
-  rpc UpdateAccount (Account) returns (Account);
+  rpc GetAccounts (GetAccountsRequest) returns (GetAccountsResponse);
+  rpc CreateAccount (Account) returns (CreateAccountResponse);
   rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse);
+  rpc UpdateAccount (Account) returns (Account);
 }
 
-message DeleteAccountRequest {
-  string id = 1;
+message DeleteAccountRequest{
+  string id=1;
 }
 
-message DeleteAccountResponse {
-  string result = 1;
+message DeleteAccountResponse{
+  string result=1;
 }
 
 message GetAccountsRequest {
-  string id = 1;
-  string staff_id = 2;
-  string username = 3;
-  int32 page = 4;
-  int32 offset = 5;
+  string id =1;
+  string staff_id=2;
+  string username=3;
+  int32 page =4;
+  int32 offset=5;
 }
 
-message AccountResponse {
-  repeated Account accounts = 1;
+message CreateAccountResponse {
+  string id =1;
+}
+
+message GetAccountsResponse {
+  repeated Account accounts=1;
 }
 
 message Account {

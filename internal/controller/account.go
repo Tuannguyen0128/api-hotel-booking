@@ -14,20 +14,24 @@ import (
 
 func GetAccounts(c *gin.Context) {
 	q := c.Request.URL.Query()
-	limitS := q.Get("offset")
-	pageS := q.Get("page")
+
 	id := q.Get("id")
 	username := q.Get("username")
 	staffID := q.Get("staff_id")
-	limit, err := strconv.Atoi(limitS)
+
+	offsetS := q.Get("offset")
+	offset, err := strconv.Atoi(offsetS)
 	if err != nil {
 		log.Println(err)
 	}
+
+	pageS := q.Get("page")
 	page, err := strconv.Atoi(pageS)
 	if err != nil {
 		log.Println(err)
 	}
-	accounts := client.GetAccounts(&proto.GetAccountsRequest{Page: int32(page), Offset: int32(limit), Id: id, Username: username, StaffId: staffID}, client.GrpcClient.AccountClient)
+
+	accounts := client.GetAccounts(&proto.GetAccountsRequest{Page: int32(page), Offset: int32(offset), Id: id, Username: username, StaffId: staffID}, client.GrpcClient.AccountClient)
 	if accounts == nil {
 		c.JSON(http.StatusOK, &proto.Account{})
 		return

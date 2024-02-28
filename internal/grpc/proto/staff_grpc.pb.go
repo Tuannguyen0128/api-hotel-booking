@@ -30,7 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StaffServiceClient interface {
 	GetStaffs(ctx context.Context, in *GetStaffsRequest, opts ...grpc.CallOption) (*GetStaffsResponse, error)
-	CreateStaff(ctx context.Context, in *Staff, opts ...grpc.CallOption) (*Staff, error)
+	CreateStaff(ctx context.Context, in *Staff, opts ...grpc.CallOption) (*CreateStaffResponse, error)
 	UpdateStaff(ctx context.Context, in *Staff, opts ...grpc.CallOption) (*Staff, error)
 	DeleteStaff(ctx context.Context, in *DeleteStaffRequest, opts ...grpc.CallOption) (*DeleteStaffResponse, error)
 }
@@ -52,8 +52,8 @@ func (c *staffServiceClient) GetStaffs(ctx context.Context, in *GetStaffsRequest
 	return out, nil
 }
 
-func (c *staffServiceClient) CreateStaff(ctx context.Context, in *Staff, opts ...grpc.CallOption) (*Staff, error) {
-	out := new(Staff)
+func (c *staffServiceClient) CreateStaff(ctx context.Context, in *Staff, opts ...grpc.CallOption) (*CreateStaffResponse, error) {
+	out := new(CreateStaffResponse)
 	err := c.cc.Invoke(ctx, StaffService_CreateStaff_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -84,7 +84,7 @@ func (c *staffServiceClient) DeleteStaff(ctx context.Context, in *DeleteStaffReq
 // for forward compatibility
 type StaffServiceServer interface {
 	GetStaffs(context.Context, *GetStaffsRequest) (*GetStaffsResponse, error)
-	CreateStaff(context.Context, *Staff) (*Staff, error)
+	CreateStaff(context.Context, *Staff) (*CreateStaffResponse, error)
 	UpdateStaff(context.Context, *Staff) (*Staff, error)
 	DeleteStaff(context.Context, *DeleteStaffRequest) (*DeleteStaffResponse, error)
 	mustEmbedUnimplementedStaffServiceServer()
@@ -97,7 +97,7 @@ type UnimplementedStaffServiceServer struct {
 func (UnimplementedStaffServiceServer) GetStaffs(context.Context, *GetStaffsRequest) (*GetStaffsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStaffs not implemented")
 }
-func (UnimplementedStaffServiceServer) CreateStaff(context.Context, *Staff) (*Staff, error) {
+func (UnimplementedStaffServiceServer) CreateStaff(context.Context, *Staff) (*CreateStaffResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateStaff not implemented")
 }
 func (UnimplementedStaffServiceServer) UpdateStaff(context.Context, *Staff) (*Staff, error) {
